@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ConferenceService } from './conference.service';
@@ -10,8 +10,6 @@ import { Conferences, Conference } from './conferences';
     styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-
-    @ViewChild("filterInput") private input: ElementRef;
 
     public isLoading = false;
     public filter: string;
@@ -42,7 +40,7 @@ export class AppComponent implements OnInit {
 
             this.conferences =
                 await this.conferenceService
-                    .getConferences();
+                          .getConferences();
         } catch (e) {
             console.error(e);
         } finally {
@@ -63,12 +61,7 @@ export class AppComponent implements OnInit {
     }
 
     onClearSearch() {
-        if (this.input && this.input.nativeElement) {
-            if (this.input.nativeElement.value === "") {
-                return;
-            }
-            this.onFilter(this.input.nativeElement.value = "");
-        }
+        this.filter = '';
     }
 
     containsDetails(conf: Conference): boolean {

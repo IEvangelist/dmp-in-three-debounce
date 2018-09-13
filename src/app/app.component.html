@@ -1,19 +1,19 @@
 <div class='header'>
   <mat-toolbar color="primary">
-    <h1 style='font-size: 2.5em; padding-left: 25%; padding-top: 10px; padding-bottom: 10px;'>DMP in 3: RxJS Debounce</h1>
+    <h1 style='font-size: 2.5em; padding-left: 25%; padding-top: 20px; padding-bottom: 20px;'>DMP in 3: RxJS Debounce</h1>
   </mat-toolbar>
 </div>
 <br /><br /><br /><br />
 <form class="container">
   <mat-form-field color="primary" focused class="example-form-field">
 
-    <input #filterInput matInput type="search" 
-      [placeholder]="'Search Filter'" (keyup)="onFilter($event.target.value)"
+    <input #filterInput matInput type="search" [placeholder]="'Search Filter'" 
+      (keyup)="onFilter($event.target.value)"
       [attr.autocomplete]="'off'" name="filter" [disabled]="isLoading" [(ngModel)]="filter" />
 
     <mat-icon matPrefix>filter_list</mat-icon>
-    <mat-progress-spinner *ngIf='isLoading' matSuffix mode='indeterminate'></mat-progress-spinner>
-    <button mat-button *ngIf="filter && !isLoading" matSuffix mat-icon-button aria-label="Clear" (click)="filter=''">
+    <mat-progress-spinner *ngIf='isLoading' diameter='70' matSuffix mode='indeterminate'></mat-progress-spinner>
+    <button mat-button *ngIf="filter" matSuffix mat-icon-button aria-label="Clear" (click)="filter=''">
       <mat-icon>close</mat-icon>
     </button>
   </mat-form-field>
@@ -25,7 +25,8 @@
         <mat-card style='width: 94%'>
           <mat-card-header>
             <mat-card-title>{{conf.name}}</mat-card-title>
-            <mat-card-subtitle *ngIf="conf.type && conf.location">{{capitalize(conf.type)}} in {{conf.location.city}}, {{conf.location.country}}</mat-card-subtitle>
+            <mat-card-subtitle *ngIf="conf.type && conf.location">{{capitalize(conf.type)}} in {{conf.location.city}},
+              {{conf.location.country}}</mat-card-subtitle>
           </mat-card-header>
           <mat-card-content>
             <p *ngIf="containsDetails(conf)">{{getConfDetails(conf)}}</p>
