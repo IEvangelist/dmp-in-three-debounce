@@ -1,0 +1,59 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-content: center;
+    align-items: center;
+  }
+  
+.container > * {
+    width: 50%;
+}
+
+mat-form-field.mat-form-field {
+    font-size: 40px;
+    color: rgb(255, 255, 255);
+  }
+
+mat-card > * {
+  text-align: left;
+}
+
+.mat-card-header .mat-card-title {
+  font-size: 28px;
+}
+
+.mat-card-subtitle {
+  font-size: 24px;
+}
+
+.mat-card-content {
+  font-size: 20px;
+}
+
+.mat-card-actions,
+.mat-card-header-text,
+.mat-card-content,
+mat-list > div > mat-card > mat-card-header > div {
+  margin-left: 8px !important;
+}
+
+.mat-card-content {
+  white-space: pre-wrap;
+}
+
+mat-icon {
+  font-family: 'Material Icons' !important;
+}
+
+.scrollable {
+  height: 750px;
+  overflow-y: auto;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
