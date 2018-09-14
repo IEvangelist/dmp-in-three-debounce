@@ -1,29 +1,32 @@
 {
   "name": "dmp-in-three-debounce",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "now-build": "echo 'Built locally'",
+    "now-start": "serve ./dist/dmp-in-three-debounce/ --single"
   },
   "private": true,
   "dependencies": {
     "@angular/animations": "^6.1.7",
     "@angular/cdk": "^6.4.7",
-    "@angular/common": "^6.1.0",
-    "@angular/compiler": "^6.1.0",
-    "@angular/core": "^6.1.0",
-    "@angular/forms": "^6.1.0",
-    "@angular/http": "^6.1.0",
+    "@angular/common": "^6.1.7",
+    "@angular/compiler": "^6.1.7",
+    "@angular/core": "^6.1.7",
+    "@angular/forms": "^6.1.7",
+    "@angular/http": "^6.1.7",
     "@angular/material": "^6.4.7",
-    "@angular/platform-browser": "^6.1.0",
-    "@angular/platform-browser-dynamic": "^6.1.0",
-    "@angular/router": "^6.1.0",
+    "@angular/platform-browser": "^6.1.7",
+    "@angular/platform-browser-dynamic": "^6.1.7",
+    "@angular/router": "^6.1.7",
     "core-js": "^2.5.4",
     "rxjs": "~6.2.0",
+    "serve": "^10.0.1",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {

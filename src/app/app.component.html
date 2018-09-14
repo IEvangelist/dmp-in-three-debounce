@@ -7,8 +7,7 @@
 <form class="container">
   <mat-form-field color="primary" focused class="example-form-field">
 
-    <input #filterInput matInput type="search" [placeholder]="'Search Filter'" 
-      (keyup)="onFilter($event.target.value)"
+    <input #filterInput matInput type="search" [placeholder]="'Search Filter'" (keyup)="onFilter($event.target.value)"
       [attr.autocomplete]="'off'" name="filter" [disabled]="isLoading" [(ngModel)]="filter" />
 
     <mat-icon matPrefix>filter_list</mat-icon>
@@ -19,23 +18,26 @@
   </mat-form-field>
 </form>
 <div class="container">
-  <div class='scrollable'>
-    <mat-list role="list" *ngIf='filteredConferences && filteredConferences.length'>
-      <div style='padding-bottom: 15px' *ngFor='let conf of filteredConferences'>
-        <mat-card style='width: 94%'>
-          <mat-card-header>
-            <mat-card-title>{{conf.name}}</mat-card-title>
-            <mat-card-subtitle *ngIf="conf.type && conf.location">{{capitalize(conf.type)}} in {{conf.location.city}},
-              {{conf.location.country}}</mat-card-subtitle>
-          </mat-card-header>
-          <mat-card-content>
-            <p *ngIf="containsDetails(conf)">{{getConfDetails(conf)}}</p>
-          </mat-card-content>
-          <mat-card-actions>
-            <a mat-raised-button color="primary" rel='noopener noreferrer nofollow' target='_blank' href='{{ conf.url }}'>Link</a>
-          </mat-card-actions>
-        </mat-card>
-      </div>
-    </mat-list>
+  <div class='viewbox'>
+    <div class='scrollable'>
+      <mat-list role="list" *ngIf='filteredConferences && filteredConferences.length'>
+        <div style='padding-bottom: 15px' *ngFor='let conf of filteredConferences'>
+          <mat-card style='width: 94%'>
+            <mat-card-header>
+              <mat-card-title>{{conf.name}}</mat-card-title>
+              <mat-card-subtitle *ngIf="conf.type && conf.location">{{capitalize(conf.type)}} in
+                {{conf.location.city}},
+                {{conf.location.country}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <p *ngIf="containsDetails(conf)">{{getConfDetails(conf)}}</p>
+            </mat-card-content>
+            <mat-card-actions>
+              <a mat-raised-button color="primary" rel='noopener noreferrer nofollow' target='_blank' href='{{ conf.url }}'>Link</a>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+      </mat-list>
+    </div>
   </div>
 </div>
