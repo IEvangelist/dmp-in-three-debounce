@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ConferenceService } from './conference.service';
@@ -9,7 +9,7 @@ import { Conferences, Conference } from './conferences';
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
 
     public isLoading = false;
     public filter: string;
@@ -21,17 +21,17 @@ export class AppComponent implements OnInit {
 
     private conferences: Conferences = [];
     private filterUpdated: Subject<string> = new Subject<string>();
-    private subscription = new Subscription();
+    private subscription: Subscription = null;
 
     constructor(private readonly conferenceService: ConferenceService) {
-        this.subscription.add(
+        this.subscription =
             this.filterUpdated
                 .asObservable()
                 .pipe(debounceTime(350))
                 .pipe(distinctUntilChanged())
                 .subscribe((filter: string) => {
                     this.filter = filter;
-                }));
+                });
     }
 
     async ngOnInit() {
@@ -40,11 +40,17 @@ export class AppComponent implements OnInit {
 
             this.conferences =
                 await this.conferenceService
-                          .getConferences();
+                    .getConferences();
         } catch (e) {
             console.error(e);
         } finally {
             this.isLoading = false;
+        }
+    }
+
+    ngOnDestroy() {
+        if (this.subscription) {
+            this.subscription.unsubscribe();
         }
     }
 
@@ -56,7 +62,7 @@ export class AppComponent implements OnInit {
         return conference.name.toLowerCase().indexOf(lowerCaseSearch) > -1;
     }
 
-    public onFilter(filter: string) {
+    public onFilterApplied(filter: string) {
         this.filterUpdated.next(filter);
     }
 
@@ -65,7 +71,7 @@ export class AppComponent implements OnInit {
     }
 
     containsDetails(conf: Conference): boolean {
-        return conf && !!(conf.description || conf.date || conf.price || conf.tags || conf.type);
+        return conf && !!(conf.description || conf.date || conf.price || conf.type);
     }
 
     getConfDetails(conf: Conference): string {
@@ -83,17 +89,10 @@ export class AppComponent implements OnInit {
                 details += `Date: ${conf.date.start} - ${conf.date.end}\n`;
             }
         }
-        if (conf.tags) {
-            details += `Tags: ${conf.tags.join(', ')}\n`;
-        }
         if (conf.price) {
             details += `Price: ${conf.price.low}-${conf.price.high} (${conf.price.currency})`;
         }
 
         return details;
-    }
-
-    capitalize(str: string): string {
-        return str.charAt(0).toUpperCase() + str.slice(1);
     }
 }

@@ -10,7 +10,8 @@ import {
   MatToolbarModule,
   MatListModule,
   MatCardModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+  MatChipsModule
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -32,6 +33,7 @@ import { AppComponent } from './app.component';
     MatListModule,
     MatCardModule,
     MatProgressSpinnerModule,
+    MatChipsModule,
     BrowserAnimationsModule
   ],
   providers: [],
